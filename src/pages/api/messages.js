@@ -1,3 +1,5 @@
+// pages/api/messages.js
+
 import { connectToDatabase } from '../../lib/mongodb';
 
 export default async function handler(req, res) {
@@ -7,7 +9,7 @@ export default async function handler(req, res) {
     const { db } = await connectToDatabase();
 
     if (method === 'POST') {
-      // Menyisipkan data ke dalam koleksi 'pesan'
+      // Insert data into 'pesan' collection
       const { to, pesan, musik } = req.body;
 
       if (!to) {
@@ -16,13 +18,13 @@ export default async function handler(req, res) {
 
       const result = await db.collection('pesan').insertOne({
         to,
-        pesan: pesan || null, // Jika 'pesan' tidak ada, gunakan null
-        musik: musik || null  // Jika 'musik' tidak ada, gunakan null
+        pesan: pesan || null, // Use null if 'pesan' is not provided
+        musik: musik || null  // Use null if 'musik' is not provided
       });
 
       return res.status(201).json({ message: 'Data inserted successfully', id: result.insertedId });
     } else if (method === 'GET') {
-      // Mengambil semua data dari koleksi 'pesan'
+      // Retrieve all data from 'pesan' collection
       const messages = await db.collection('pesan').find({}).toArray();
       return res.status(200).json(messages);
     } else {
