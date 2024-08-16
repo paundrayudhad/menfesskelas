@@ -17,7 +17,7 @@ export async function getServerSideProps() {
         <th class="py-2 px-4 border-b">To</th>
         <th class="py-2 px-4 border-b">Pesan</th>
         <th class="py-2 px-4 border-b">Musik</th>
-      </tr>
+      </tr> 
     </thead>
     <tbody>
       {data.map((item) => (
