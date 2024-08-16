@@ -1,12 +1,17 @@
 import { MongoClient } from 'mongodb';
 
 const uri = process.env.MONGODB_URI;
+const dbName = process.env.MONGODB_DB;
 
 let client;
 let clientPromise;
 
-if (!process.env.MONGODB_URI) {
+if (!uri) {
   throw new Error("Please add your Mongo URI to .env.local");
+}
+
+if (!dbName) {
+  throw new Error("Please add your database name to .env.local");
 }
 
 if (process.env.NODE_ENV === 'development') {
@@ -25,7 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 export async function connectToDatabase() {
   try {
     const client = await clientPromise;
-    const db = client.db(process.env.MONGODB_DB);
+    const db = client.db(dbName);
     console.log("Successfully connected to database");
     return { client, db };
   } catch (error) {
