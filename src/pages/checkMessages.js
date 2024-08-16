@@ -1,5 +1,5 @@
 export async function getServerSideProps() {
-    const res = await fetch('http://localhost:3000/api/messages');
+    const res = await fetch('${process.env.NEXT_PUBLIC_API_URL}/messages');
     const data = await res.json();
   
     return {
