@@ -54,7 +54,7 @@ export default function KirimPesan() {
         <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">Kirimkan Pesan ke Kami</h1>
 
         <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
-          Kirimkan Pesan ke Kelas Kami
+          Kirimkan Pesan ke Kelas Kami <br />
           XII RPL VISKA - Sixth Generation
         </p>
 
