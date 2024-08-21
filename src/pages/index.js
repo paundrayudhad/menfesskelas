@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 export default function KirimPesan() {
   const [formData, setFormData] = useState({ ke: '', pengirim: '', pesan: '', musik: '' });
@@ -14,23 +15,23 @@ export default function KirimPesan() {
     setLoading(true); // Set loading state to true
     setError(null); // Clear any previous errors
 
+    console.log("Submitting data:", formData); // Debug: Log formData
+
     try {
-      const res = await fetch('https://portalberita.jeftechjuliversegroup.asia/api/messages.php', {
-        method: 'POST',
+      const response = await axios.post('https://portalberita.jeftechjuliversegroup.asia/api/messages.php', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-      
-      if (res.ok) {
+      console.log("Response data:", response.data); // Debug: Log response data
+
+      if (response.status === 200) {
         alert('Message added successfully');
         setFormData({ ke: '', pengirim: '', pesan: '', musik: '' }); // Reset form data
       } else {
         alert('Error adding message');
-        setError(data.message || 'Unknown error occurred');
+        setError(response.data.message || 'Unknown error occurred');
       }
     } catch (error) {
       console.error('An error occurred:', error);
@@ -44,11 +45,10 @@ export default function KirimPesan() {
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-lg">
-        <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">Kirimkan Pesan ke Kami</h1>
+        <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">Songfess/Menfess</h1>
 
         <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati sunt dolores deleniti
-          inventore quaerat mollitia?
+          Kirimkan pesan kepada siswa kelas XII RPL
         </p>
 
         <form onSubmit={handleSubmit} className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
