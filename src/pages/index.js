@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function KirimPesan() {
-  const [formData, setFormData] = useState({ to: '', pesan: '', musik: '' });
+  const [formData, setFormData] = useState({ ke: '', pengirim: '', pesan: '', musik: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -27,12 +27,10 @@ export default function KirimPesan() {
       
       if (res.ok) {
         alert('Message added successfully');
-        setFormData({ to: '', pesan: '', musik: '' }); // Reset form data
-        // Optionally, you can also reload the page
-        // window.location.reload();
+        setFormData({ ke: '', pengirim: '', pesan: '', musik: '' }); // Reset form data
       } else {
         alert('Error adding message');
-        setError(data.error || 'Unknown error occurred');
+        setError(data.message || 'Unknown error occurred');
       }
     } catch (error) {
       console.error('An error occurred:', error);
