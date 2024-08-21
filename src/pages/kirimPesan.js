@@ -15,7 +15,7 @@ export default function KirimPesan() {
     setError(null); // Clear any previous errors
 
     try {
-      const res = await fetch('/api/messages', {
+      const res = await fetch('https://portalberita.jeftechjuliversegroup.asia/api/messages.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,10 +58,24 @@ export default function KirimPesan() {
             <div className="relative">
               <input
                 type="text"
-                name="to"
+                name="ke"
                 className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                 placeholder="isi orang yang ingin kamu kirimi pesan"
-                value={formData.to}
+                value={formData.ke}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="relative">
+              <input
+                type="text"
+                name="pengirim"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                placeholder="isi pengirim"
+                value={formData.pengirim}
                 onChange={handleChange}
                 required
               />
